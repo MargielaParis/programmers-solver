@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProgrammersSolver Cookie Helper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="popup-header">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <h1>ProgrammersSolver</h1>
+        <p>cookie helper</p>
+      </div>
+    </header>
+
+    <div id="status" class="status waiting" role="status">세션 상태를 확인하는 중...</div>
+
+    <button id="copyBtn" class="copy-button" disabled>
+      <span aria-hidden="true">↗</span> 전체 쿠키 복사
+    </button>
+    <p id="copyHint" class="copy-hint" hidden>VS Code의 쿠키 입력창에 붙여넣으세요.</p>
+
+    <section class="instructions">
+      <p class="section-label">QUICK ROUTE</p>
+      <ol>
+        <li>프로그래머스에 로그인</li>
+        <li>전체 쿠키 복사</li>
+        <li><code>ProgrammersSolver: Set Session Cookie</code> 실행</li>
+      </ol>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

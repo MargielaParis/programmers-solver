@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "ProgrammersSolver Cookie Helper",
+  "version": "0.1.0",
+  "description": "ProgrammersSolver에 프로그래머스 세션 쿠키를 복사합니다",
+  "permissions": ["cookies"],
+  "host_permissions": ["https://*.programmers.co.kr/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
