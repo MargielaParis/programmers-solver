@@ -1,0 +1,237 @@
+{
+  "name": "programmers-solver",
+  "displayName": "ProgrammersSolver",
+  "description": "VS Code에서 프로그래머스 문제를 읽고 로컬 테스트하는 작업대",
+  "version": "0.1.1",
+  "publisher": "kiyeon",
+  "icon": "resources/programmers-solver.png",
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "programmers.setSessionCookie",
+          "title": "ProgrammersSolver: Set Session Cookie",
+        "icon": "$(key)"
+      },
+      {
+        "command": "programmers.refreshProblems",
+          "title": "ProgrammersSolver: Refresh Problem List",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "programmers.openProblem",
+      "title": "ProgrammersSolver: Open Problem"
+      },
+      {
+        "command": "programmers.selectPage",
+          "title": "ProgrammersSolver: Select Page",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "programmers.nextPage",
+          "title": "ProgrammersSolver: Next Page",
+        "icon": "$(arrow-right)"
+      },
+      {
+        "command": "programmers.prevPage",
+          "title": "ProgrammersSolver: Previous Page",
+        "icon": "$(arrow-left)"
+      },
+      {
+        "command": "programmers.filterByLevel",
+          "title": "ProgrammersSolver: Filter by Level",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "programmers.filterByStatus",
+          "title": "ProgrammersSolver: Filter by Status",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "programmers.filterByLanguage",
+          "title": "ProgrammersSolver: Filter by Language",
+        "icon": "$(symbol-keyword)"
+      },
+      {
+        "command": "programmers.toggleTypeScript",
+          "title": "ProgrammersSolver: Toggle TypeScript Mode",
+        "icon": "$(symbol-type-parameter)"
+      },
+      {
+        "command": "programmers.submitCode",
+      "title": "ProgrammersSolver: Submit Code",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "programmers.runCode",
+      "title": "ProgrammersSolver: Run Code",
+        "icon": "$(play)"
+      },
+      {
+        "command": "programmers.toggleProblemPanel",
+      "title": "ProgrammersSolver: Toggle Problem Panel"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "programmers.toggleProblemPanel",
+        "key": "cmd+shift+;",
+        "mac": "cmd+shift+;"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "programmers-sidebar",
+          "title": "ProgrammersSolver",
+          "icon": "resources/programmers-solver.svg"
+        }
+      ]
+    },
+    "views": {
+      "programmers-sidebar": [
+        {
+          "id": "programmers-view",
+          "name": "list",
+          "icon": "resources/programmers-solver.svg"
+        },
+        {
+          "type": "webview",
+          "id": "programmers.problemView",
+          "name": "detail"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "programmers.refreshProblems",
+          "when": "view == programmers-view",
+          "group": "navigation@1"
+        },
+        {
+          "command": "programmers.filterByLevel",
+          "when": "view == programmers-view",
+          "group": "navigation@2"
+        },
+        {
+          "command": "programmers.filterByStatus",
+          "when": "view == programmers-view",
+          "group": "navigation@3"
+        },
+        {
+          "command": "programmers.filterByLanguage",
+          "when": "view == programmers-view",
+          "group": "navigation@4"
+        },
+        {
+          "command": "programmers.toggleTypeScript",
+          "when": "view == programmers-view",
+          "group": "navigation@5"
+        },
+        {
+          "command": "programmers.prevPage",
+          "when": "view == programmers-view",
+          "group": "navigation@6"
+        },
+        {
+          "command": "programmers.nextPage",
+          "when": "view == programmers-view",
+          "group": "navigation@7"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ProgrammersSolver",
+      "properties": {
+        "programmers.filter.level": {
+          "type": "array",
+          "default": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "표시할 문제 레벨 (1-5)"
+        },
+        "programmers.filter.language": {
+          "type": "string",
+          "default": "javascript",
+          "enum": [
+            "javascript",
+            "python3",
+            "java",
+            "cpp"
+          ],
+          "description": "기본 프로그래밍 언어"
+        },
+        "programmers.showSolvedProblems": {
+          "type": "boolean",
+          "default": true,
+          "description": "해결한 문제도 표시할지 여부"
+        },
+        "programmers.image.grayscale": {
+          "type": "boolean",
+          "default": true,
+          "description": "문제 설명 이미지의 채도를 낮춰 표시"
+        },
+        "programmers.image.opacity": {
+          "type": "number",
+          "default": 0.5,
+          "minimum": 0.1,
+          "maximum": 1,
+          "description": "문제 설명 이미지 투명도 (0.1-1.0)"
+        },
+        "programmers.image.hoverRestore": {
+          "type": "boolean",
+          "default": false,
+          "description": "마우스 hover 시 이미지 원본으로 복원"
+        },
+        "programmers.useTypeScript": {
+          "type": "boolean",
+          "default": false,
+          "description": "JavaScript 대신 TypeScript 파일 생성"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run compile && npm run esbuild-base -- --production && npm run build:webview",
+    "compile": "tsc -p ./",
+    "esbuild-base": "node esbuild.js",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "watch": "tsc -watch -p ./",
+    "build:webview": "pnpm --filter webview-ui build",
+    "dev:webview": "pnpm --filter webview-ui dev",
+    "lint": "eslint src",
+    "test": "node --test tests/**/*.test.mjs",
+    "generate:icons": "node scripts/generate-icons.mjs",
+    "package:release": "pnpm build && node scripts/package-release.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.95.0",
+    "@types/ws": "^8.18.1",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.1",
+    "eslint": "^9.15.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.15.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "ws": "^8.18.3"
+  }
+}

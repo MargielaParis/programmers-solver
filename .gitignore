@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+out/
+webview-ui/dist/
+release/
+programmers-solver-0.1.0.vsix
